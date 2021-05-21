@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1015169899009",
+    "project_id": "vacationrentals-96220",
+    "storage_bucket": "vacationrentals-96220.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015169899009:android:d250b24626b9ec37ec7e00",
+        "android_client_info": {
+          "package_name": "com.example.booking_homestay_airbnb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015169899009-hnsb68v6npv7oa7skfgajcbu3k4evpbe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCstFfyu_91UZ3jjotPq3uHfIZwJ-jcI2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015169899009-hnsb68v6npv7oa7skfgajcbu3k4evpbe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1015169899009-snakhts816n7u4perdo934o4rrdj0vg1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hcmute.edu.vn.vacationRentalsApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015169899009:android:cf3da5eb4c0c5288ec7e00",
+        "android_client_info": {
+          "package_name": "com.hcmute.edu.vn.vacation_rentals_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015169899009-hnsb68v6npv7oa7skfgajcbu3k4evpbe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCstFfyu_91UZ3jjotPq3uHfIZwJ-jcI2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015169899009-hnsb68v6npv7oa7skfgajcbu3k4evpbe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1015169899009-snakhts816n7u4perdo934o4rrdj0vg1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hcmute.edu.vn.vacationRentalsApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
