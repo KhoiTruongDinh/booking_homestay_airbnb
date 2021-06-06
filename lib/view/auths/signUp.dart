@@ -1,9 +1,8 @@
 
+import 'package:booking_homestay_airbnb/services/authentications.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import 'logIn.dart';
-
+import 'package:provider/provider.dart';
 class SignUp extends StatefulWidget
 {
 
@@ -11,20 +10,21 @@ class SignUp extends StatefulWidget
   _SignUpState createState() =>_SignUpState();
 
 }
-
-
 class _SignUpState extends State<SignUp>
 {
 
-  final formStateKey = GlobalKey<FormState>(); // tạo GlobalKey cho form
-  User user = User(); // tạo object User
+  final formStateKey = GlobalKey<FormState>(); 
 
   final cleartextName = TextEditingController();
   final cleartextPass = TextEditingController();
   final cleartextMail = TextEditingController();
   final cleartextPhone = TextEditingController();
-  clearTextInput()
-  {
+
+  bool _showpass = false;
+
+  @override
+  void initState(){
+    super.initState();
     cleartextName.clear();
     cleartextPass.clear();
     cleartextMail.clear();
@@ -32,18 +32,27 @@ class _SignUpState extends State<SignUp>
   }
 
   @override
+  void dispose() {
+    cleartextName.dispose();
+    cleartextPass.dispose();
+    cleartextMail.dispose();
+    cleartextPhone.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
+        body: Center(
           child: SingleChildScrollView(
 
             child: Container(
-              margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-              padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
               alignment: Alignment.topCenter,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 5,),
+                border: Border.all(color: Colors.black, width: 2,),
                 borderRadius: BorderRadius.circular(12),
               ),
 
@@ -53,13 +62,14 @@ class _SignUpState extends State<SignUp>
                   Text('Đăng ký tài khoản',
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold
+                        fontSize: 30,
+                        //fontWeight: FontWeight.bold
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Form(
+
+                  SizedBox(height: 50),
+
+                  Form(
                       key: formStateKey, // gán key cho Form
                       child: Column(
                         children: [
@@ -77,24 +87,6 @@ class _SignUpState extends State<SignUp>
                                       borderRadius: BorderRadius.all(Radius.circular(20)))
                               ),
                               validator: validateTen,
-                              onSaved: saveTen,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                            child: TextFormField(
-                              controller: cleartextPass,
-                              decoration: InputDecoration(
-                                  icon: Icon(Icons.lock),
-                                  hintText: 'Vui lòng nhập đúng mật khẩu',
-                                  labelText: 'Mật khẩu',
-                                  border: OutlineInputBorder(
-                                      borderSide:
-                                      BorderSide(color: Colors.blue, width: 3),
-                                      borderRadius: BorderRadius.all(Radius.circular(20)))
-                              ),
-                              validator: validatePass,
-                              onSaved: savePass,
                             ),
                           ),
                           Padding(
@@ -111,9 +103,31 @@ class _SignUpState extends State<SignUp>
                                       borderRadius: BorderRadius.all(Radius.circular(20)))
                               ),
                               validator: validateMail,
-                              onSaved: saveMail,
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                            child: TextFormField(
+                              obscureText: !_showpass,
+                              controller: cleartextPass,
+                              decoration: InputDecoration(
+                                  icon: Icon(Icons.lock),
+                                  hintText: 'Nhập mật khẩu',
+                                  labelText: 'Mật khẩu',
+                                  border: OutlineInputBorder(
+                                      borderSide:
+                                      BorderSide(color: Colors.blue, width: 3),
+                                      borderRadius: BorderRadius.all(Radius.circular(20))
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: _showpass ? Icon(Icons.visibility_off_rounded) : Icon(Icons.visibility_rounded),
+                                    onPressed: showPass,
+                                  )
+                                ),
+                              validator: validatePass,
+                            ),
+                          ),
+                          
                           Padding(
                             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                             child: TextFormField(
@@ -128,54 +142,35 @@ class _SignUpState extends State<SignUp>
                                       borderRadius: BorderRadius.all(Radius.circular(20)))
                               ),
                               validator: validatePhone,
-                              onSaved: savePhone,
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ),
                   SizedBox(height: 30), // sử dụng SizedBox để tạo một khoảng space giữa Button và Form
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(
-                        width: 150,
+                        width: 250,
                         height: 50,
                         child: RaisedButton(
-                          child: Text('Đăng ký',
+                          child: Text(
+                            !context.watch<AuthService>().registerState ? 'Đăng ký' : 'Đang đăng ký ...',
                             style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                                 fontSize: 16),
                           ),
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadiusDirectional.circular(20.0),
-                            side: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadiusDirectional.circular(10),
                           ),
                           hoverColor: Colors.indigo,
-                          onPressed: submitForm,
+                          onPressed: ()=>{
+                            submitForm(cleartextName.text, cleartextPass.text, cleartextMail.text,cleartextPhone.text)
+                          },
                         ),
                       ),
-
-
-                      // RaisedButton(
-                      //     child: Text('Hủy'),
-                      //
-                      //     shape: RoundedRectangleBorder(
-                      //       borderRadius: BorderRadiusDirectional.circular(20.0),
-                      //       side: BorderSide(color: Colors.red),
-                      //     ),
-                      //     hoverColor: Colors.pink,
-                      //     onPressed: () {
-                      //       Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(builder: (context) => Login()),
-                      //       );
-                      //     }
-                      // )
                     ],
                   ),
                   Padding(
@@ -189,11 +184,10 @@ class _SignUpState extends State<SignUp>
                               TextSpan(
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                                      Navigator.pop(context);
                                     },
                                   text: "Đăng nhập",
                                   style: TextStyle(color: Colors.blue,fontSize: 16))
-
                             ]
                         ),
                       )
@@ -206,80 +200,98 @@ class _SignUpState extends State<SignUp>
       ),
     );
   }
-  void saveTen(String inputName) {
-    user.name = inputName; // lưu tên vào biến user
-  }
 
-  void savePass(String inputPass) {
-    user.pass = inputPass; // lưu passwork vào biến user
-  }
-  void saveMail(String inputMail)
-  {
+  void showPass (){
+    setState(() {
+      _showpass = !_showpass;
+    });
 
-    user.mail = inputMail;
   }
-  void savePhone(String inputPhone)
-  {
-    user.phone = inputPhone;
-  }
-
-
 
   String validateTen(String inputName) {
     if (inputName.isEmpty) {
-      // String khác null, đồng nghĩa với validate lỗi, đây cũng chính là nội dung lỗi
       return 'Tên không được trống';
     } else {
-      // String trả về là null, đồng nghĩa với validate thành công
       return null;
     }
   }
 
   String validatePass(String inputPass) {
     if (inputPass.isEmpty) {
-      return 'Chưa nhập mật khẩu bạn ơi';
+      return 'Không được để trống';
     } else {
       return null;
     }
   }
-  String validateMail(String inputMail)
+  String validateMail(String value)
   {
-    if (inputMail.isEmpty) {
-      return 'Chưa nhập Mail bạn ơi';
-    } else {
-      return null;
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (value.length == 0) {
+      return 'Không được để trống';
     }
+    else if (!regex.hasMatch(value))
+      return 'Vui lòng nhập đúng định dạng';
+    else
+      return null;
   }
   String validatePhone(String inputPhone) {
-    if (inputPhone.isEmpty) {
-      return 'Vui lòng nhập số điện thoại';
+    String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    RegExp regExp = new RegExp(pattern);
+    if (inputPhone.length == 0) {
+      return 'Không được để trống';
     }
-    else
-    {
-      return null;
+    else if( inputPhone.length != 10){
+      return 'Số điện thoại có 10 số';
     }
+    else if (!regExp.hasMatch(inputPhone)) {
+      return 'Vui lòng nhập đúng định dạng';
+    }
+    return null;
   }
-  void submitForm() {
-    if (formStateKey.currentState.validate()) { // hàm validate trả về true là thành công, false là thất bại
-      print('Trước khi save: Tên: ${user.name}, Password: ${user.pass}, Mail: ${user.mail} và Phone: ${user.phone}');
-      formStateKey.currentState.save(); // khi form gọi hàm save thì tất cả các TextFormField sẽ gọi hàm save
-      print('Sau khi save: Tên: ${user.name}, Password: ${user.pass}, Mail: ${user.mail} và Phone: ${user.phone}');
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Login()),
-      );
-    } else {
+  void submitForm(String name, String pass, String email, String sdt) async {
+    if (formStateKey.currentState.validate()) {
+      String k = await context.read<AuthService>().register(email,pass,sdt,name);
+      switch (k) {
+        case 'true':
+          Navigator.pop(context);
+          break;
+        case 'invalid-email':
+          showErrDialog("Email không hợp lệ!");
+          break;
+        case 'email-already-in-use':
+          showErrDialog("Email này đã có người sử dụng!");
+          break;
+        case 'weak-password':
+          showErrDialog("Vui lòng chọn mật khẩu có tính bảo mật cao hơn! (Hơn 6 ký tự)");
+          break;
+      }
+    }
+    else {
       print('Validate thất bại. Vui lòng thử lại');
     }
   }
-}
 
-class User {
-  User({this.name, this.pass, this.mail, this.phone});
-
-  String name;
-  String pass;
-  String mail;
-  String phone;
+  showErrDialog(String err) {
+    // to hide the keyboard, if it is still p
+    FocusScope.of(context).requestFocus(new FocusNode());
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Có lỗi!"),
+            content: Text(err),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Ok"),
+              ),
+            ],
+          );
+        });
+  }
 }
 
