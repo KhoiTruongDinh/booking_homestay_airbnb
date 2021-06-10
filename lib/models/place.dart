@@ -170,9 +170,10 @@ class Place with ChangeNotifier{
   }
 
 
-  Future<String> creatPlace() async{
+  Future<String> creatPlace(String host) async{
     try {
       await FirebaseFirestore.instance.collection("place").add({
+        'host': host,
         'title': _title,
         'guest': _guest,
         'pricing': _pricing,
