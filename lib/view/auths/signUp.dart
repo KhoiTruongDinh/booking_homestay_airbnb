@@ -49,7 +49,7 @@ class _SignUpState extends State<SignUp>
 
             child: Container(
               margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
+              padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
               alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black, width: 2,),

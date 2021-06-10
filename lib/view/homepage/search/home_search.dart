@@ -1,4 +1,5 @@
 import 'package:booking_homestay_airbnb/models/location_address.dart';
+import 'package:booking_homestay_airbnb/view/homepage/search/result.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -48,10 +49,11 @@ class Search extends StatelessWidget {
                 ),
               ),
               onSuggestionSelected: (SearchAddress suggestion) {
-                final address = suggestion;
-                ScaffoldMessenger
-                    .of(context)
-                    .showSnackBar(new SnackBar(content: new Text(address.name)));
+                Navigator.push(
+                          context,
+                          MaterialPageRoute( builder: (context) => Result(query: suggestion.code, address: suggestion.name,),
+                        ),
+                  );
               },
 
             ),

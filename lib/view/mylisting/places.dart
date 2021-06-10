@@ -22,7 +22,7 @@ class _ListPlaceState extends State<ListPlace> {
   Widget build(BuildContext context) {
     host = context.read<AuthService>().user;
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
       child: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Column(
@@ -66,7 +66,7 @@ class _ListPlaceState extends State<ListPlace> {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontWeight: FontWeight.normal,
-                                  fontSize: 25
+                                  fontSize: 23
                                   ),
                                 ),
                               Text(

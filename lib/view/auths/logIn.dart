@@ -49,7 +49,7 @@ class _LoginState extends State<Login>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
-                SizedBox(height: 100),
+                SizedBox(height: 50),
                 Container(
                     width: 100,
                     height: 100,
