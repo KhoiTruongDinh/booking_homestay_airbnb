@@ -19,7 +19,7 @@ class _HomeLikeState extends State<HomeLike> {
             ),
             pinned: true,
             backgroundColor: Colors.transparent,
-            expandedHeight: MediaQuery.of(context).size.height * 0.4,
+            expandedHeight: MediaQuery.of(context).size.height * 0.3,
             forceElevated: true,
             flexibleSpace: Stack(
               children: [

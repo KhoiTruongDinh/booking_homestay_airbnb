@@ -2,6 +2,8 @@ import 'package:booking_homestay_airbnb/models/place.dart';
 import 'package:booking_homestay_airbnb/services/authentications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 
 import '../../constants.dart';
 import 'addplace/stepper.dart';
@@ -58,8 +60,29 @@ class _ListPlaceState extends State<ListPlace> {
                               ),
                               SizedBox(height:10),
                               Text(document['propertyType']),
-                              Text(document['title']),
-                              Text(document['tinhhuyenxa']),
+                              Text(
+                                document['title'],
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 25
+                                  ),
+                                ),
+                              Text(
+                                document['tinhhuyenxa'],
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis, 
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w300
+                                  ),),
+                              Text(
+                                NumberFormat.currency(locale: 'vi', symbol:'đ/đêm').format(document['pricing']),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 17
+                                  ),
+                                ),
                             ],
                           ),)
                         ),
