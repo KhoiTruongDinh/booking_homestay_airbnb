@@ -1,5 +1,6 @@
 import 'package:booking_homestay_airbnb/models/place.dart';
 import 'package:booking_homestay_airbnb/services/authentications.dart';
+import 'package:booking_homestay_airbnb/view/place_info/infoplace.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -39,7 +40,12 @@ class _ListPlaceState extends State<ListPlace> {
                     shrinkWrap: true,
                     children: snapshot.data.docs.map((document) {
                       return InkWell(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute( builder: (context) => PlaceDetails(id: document.id,),
+                        ));
+                        },
                         child: Padding(
                           padding: EdgeInsets.only(top: 10, bottom:20),
                           child: Card(
