@@ -59,18 +59,34 @@ class HeaderWithSearchBox extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: TextField(
-                  onChanged: (value){},
-                  decoration: InputDecoration(
-                      hintText: 'Search',
-                      hintStyle: TextStyle(
-                        color: kTextColor.withOpacity(0.5),
-                      ),
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      suffixIcon: Icon(Icons.search)
+                child: Container(
+                  height: 55,
+                  child: FlatButton(
+                      onPressed: (){},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.search_outlined,
+                          ),
+                          Text('Bạn sắp đi đâu?'),
+                        ],
+                      )
+
                   ),
                 ),
+                // child: TextField(
+                //   onChanged: (value){},
+                //   decoration: InputDecoration(
+                //       hintText: 'Search',
+                //       hintStyle: TextStyle(
+                //         color: kTextColor.withOpacity(0.5),
+                //       ),
+                //       enabledBorder: InputBorder.none,
+                //       focusedBorder: InputBorder.none,
+                //       suffixIcon: Icon(Icons.search)
+                //   ),
+                // ),
               )
           )
         ],
