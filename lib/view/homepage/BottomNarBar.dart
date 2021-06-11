@@ -1,4 +1,3 @@
-import 'package:booking_homestay_airbnb/view/profile/info_user.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
@@ -41,23 +40,18 @@ class BottomNarBar extends StatelessWidget {
             icon: Icon(Icons.favorite_border_outlined),
             onPressed: (){},
           ),
-          // IconButton(
-          //   icon: Icon(Icons.favorite_border_outlined),
-          //
-          //   onPressed: (){},
-          // ),
+          IconButton(
+            icon: Icon(Icons.favorite_border_outlined),
+
+            onPressed: (){},
+          ),
           IconButton(
             icon: Icon(Icons.question_answer_outlined),
             onPressed: (){},
           ),
           IconButton(
             icon: Icon(Icons.account_circle_outlined),
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => InfoUser()),
-              );
-            },
+            onPressed: (){},
           ),
         ],
       ),
